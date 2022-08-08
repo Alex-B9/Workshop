@@ -3,19 +3,18 @@ const catchAsync = require('../helpers/catchAsync');
 
 // Method GET
 const getTasks = catchAsync(async (req, res) => {
-    res.json({ message: "coucou" })
-    // const tasks = await Task.find();
-    // if (tasks.length) {
-    //     res.status(200).json({
-    //         status: 'success',
-    //         data: tasks
-    //     });
-    // } else {
-    //     res.status(404).json({
-    //         status: 'fail',
-    //         message: "No tasks found."
-    //     });
-    // }
+    const tasks = await Task.find();
+    if (tasks.length) {
+        res.status(200).json({
+            status: 'success',
+            data: tasks
+        });
+    } else {
+        res.status(404).json({
+            status: 'fail',
+            message: "No tasks found."
+        });
+    }
 });
 
 // Method ADD
