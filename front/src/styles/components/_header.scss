@@ -1,0 +1,90 @@
+.header {
+	flex-direction: column;
+	height: 100vh;
+	h1 {
+		font-size: 3em;
+		text-transform: uppercase;
+		letter-spacing: 2px;
+		margin-bottom: 100px;
+	}
+	&_content {
+		justify-content: space-around;
+		align-items: flex-start;
+		width: 100%;
+		&_left {
+			width: 25%;
+			form {
+				background: $color_2;
+				padding: 15px;
+				border-radius: 6px;
+				input {
+					width: 100%;
+					font-size: 1.2em;
+					background: none;
+					margin: 10px 0;
+					padding: 10px;
+					border-radius: 6px;
+					border: 2px solid $color_3;
+					color: $color_3;
+					transition: all 0.3s;
+					&::placeholder {
+						color: $color_3;
+					}
+					&[type='submit'] {
+						text-transform: uppercase;
+						cursor: pointer;
+					}
+					&:hover {
+						background: $color_3;
+						color: $color_2;
+						&::placeholder {
+							color: $color_2;
+						}
+					}
+				}
+			}
+		}
+		&_right {
+			width: 65%;
+			ul {
+				background: $color_2;
+				padding: 15px;
+				border-radius: 6px;
+				height: 500px;
+				overflow-y: scroll;
+				overflow-x: hidden;
+				li {
+					justify-content: space-between;
+					margin: 10px 0;
+					span {
+						font-size: 1.2em;
+						width: 85%;
+						overflow: hidden;
+					}
+					button {
+						border: none;
+						width: 15%;
+						text-align: center;
+						font-size: 1.2em;
+						text-transform: uppercase;
+						padding: 10px 20px;
+						border-radius: 6px;
+						color: $color_2;
+						font-weight: 900;
+						transition: all 0.3s;
+						cursor: pointer;
+						&:hover {
+							transform: scale(1.2);
+						}
+					}
+					.delete {
+						background: $color_5;
+					}
+					.end {
+						background: $color_4;
+					}
+				}
+			}
+		}
+	}
+}
