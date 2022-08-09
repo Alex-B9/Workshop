@@ -7,19 +7,43 @@ const Tasks = () => {
 
 	useEffect(() => {
 		if (playOnce) {
-			axios.get('http://localhost:3001/api/tasks').then((res) => {
+			axios.get('http://45.140.164.217:3005/api/tasks').then((res) => {
 				setData(res.data.data);
 				setPlayOnce(false);
 			});
 		}
 	});
 
+	const addTask = async (e) => {
+		e.preventDefault();
+
+		await axios.post('http://45.140.164.217:3005/api/add', { title: e.target.task.value }).then((res) => {
+			setPlayOnce(true);
+		});
+	};
+
+	const doneTask = async (e) => {
+		const id = e.target.id;
+
+		await axios.put(`http://45.140.164.217:3005/api/update/${id}`, { done: true }).then((res) => {
+			setPlayOnce(true);
+		});
+	};
+
+	const deleteTask = async (e) => {
+		const id = e.target.id;
+
+		await axios.delete(`http://45.140.164.217:3005/api/delete/${id}`).then((res) => {
+			setPlayOnce(true);
+		});
+	};
+
 	return (
 		<header className='container header'>
 			<h1>Todo list</h1>
 			<div className='container header_content'>
 				<div className='header_content_left'>
-					<form method='post' action='/tasks'>
+					<form onSubmit={addTask} method='post' action='/tasks'>
 						<div>
 							<input type='text' name='task' placeholder='Add task' />
 						</div>
@@ -35,7 +59,7 @@ const Tasks = () => {
 								return (
 									<li key={t._id} className='container'>
 										<span>{t.title}</span>
-										<button id={t._id} className='delete'>
+										<button onClick={deleteTask} id={t._id} className='delete'>
 											Delete
 										</button>
 									</li>
@@ -44,7 +68,7 @@ const Tasks = () => {
 								return (
 									<li key={t._id} className='container'>
 										<span>{t.title}</span>
-										<button id={t._id} className='end'>
+										<button onClick={doneTask} id={t._id} className='end'>
 											Done
 										</button>
 									</li>
