@@ -17,7 +17,7 @@ const Tasks = () => {
 	const addTask = async (e) => {
 		e.preventDefault();
 
-		await axios.post('http://localhost:3001/api/add', { title: e.target.task.value }).then((res) => {
+		await axios.post('http://localhost:3001/api/tasks/add', { title: e.target.task.value }).then((res) => {
 			setPlayOnce(true);
 		});
 	};
@@ -25,7 +25,7 @@ const Tasks = () => {
 	const doneTask = async (e) => {
 		const id = e.target.id;
 
-		await axios.put(`http://localhost:3001/api/update/${id}`, { done: true }).then((res) => {
+		await axios.put(`http://localhost:3001/api/tasks/update/${id}`, { done: true }).then((res) => {
 			setPlayOnce(true);
 		});
 	};
@@ -33,7 +33,7 @@ const Tasks = () => {
 	const deleteTask = async (e) => {
 		const id = e.target.id;
 
-		await axios.delete(`http://localhost:3001/api/delete/${id}`).then((res) => {
+		await axios.delete(`http://localhost:3001/api/tasks/delete/${id}`).then((res) => {
 			setPlayOnce(true);
 		});
 	};
@@ -58,7 +58,7 @@ const Tasks = () => {
 							if (t.done) {
 								return (
 									<li key={t._id} className='container'>
-										<span>{t.title}</span>
+										<span><s>{t.title}</s></span>
 										<button onClick={deleteTask} id={t._id} className='delete'>
 											Delete
 										</button>
